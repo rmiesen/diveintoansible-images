@@ -10,7 +10,7 @@ DRIVER_OPT='--driver-opt env.BUILDKIT_STEP_LOG_MAX_SIZE=10000000 --driver-opt en
 while [[ $# -gt 0 ]]; do
    case $1 in
    -l | --local)
-      docker build -t spurin/diveintoansible:$(git branch | grep '*' | awk {'print $2'}) .
+      docker build -t rmiesen/diveintoansible:$(git branch | grep '*' | awk {'print $2'}) .
       exit
       ;;
    -c | --crossbuild)
@@ -26,7 +26,7 @@ while [[ $# -gt 0 ]]; do
       esac
       docker buildx create --name build_container_systemd --driver-opt env.BUILDKIT_STEP_LOG_MAX_SIZE=10000000 --driver-opt env.BUILDKIT_STEP_LOG_MAX_SPEED=10000000
       docker buildx use build_container_systemd
-      docker buildx build --platform linux/amd64,linux/arm64/v8 -t spurin/diveintoansible:$(git branch | grep '*' | awk {'print $2'}) . --push
+      docker buildx build --platform linux/amd64,linux/arm64/v8 -t rmiesen/diveintoansible:$(git branch | grep '*' | awk {'print $2'}) . --push
       exit
       ;;
    -cr | --crossbuildremote)
@@ -54,7 +54,7 @@ while [[ $# -gt 0 ]]; do
       docker buildx inspect --bootstrap
 
       # Crossbuild and push to Docker Hub
-      docker buildx build --platform linux/amd64,linux/arm64/v8 -t spurin/diveintoansible:$(git branch | grep '*' | awk {'print $2'}) . --push
+      docker buildx build --platform linux/amd64,linux/arm64/v8 -t rmiesen/diveintoansible:$(git branch | grep '*' | awk {'print $2'}) . --push
       exit
       ;;
    *)

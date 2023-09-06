@@ -2,7 +2,7 @@ FROM spurin/container-systemd-sshd-ttyd:ubuntu_22.04
 
 # Install editors and common utilities, openssl (for the healthcheck script), python and associated build utilities
 RUN apt-get update \
-    && apt-get install -y vim nano \
+    && apt-get install -y vim nano emacs-nox \
     openssl \
     build-essential python3 python3-pip python3-dev libffi-dev libssl-dev \
     iproute2 iputils-ping git net-tools lsof unzip \
